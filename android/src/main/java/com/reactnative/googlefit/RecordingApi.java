@@ -11,31 +11,24 @@
 
 package com.reactnative.googlefit;
 
-import com.reactnative.googlefit.GoogleFitManager;
-
 import com.facebook.react.bridge.ReactContext;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.fitness.Fitness;
-import com.google.android.gms.fitness.FitnessStatusCodes;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.fitness.data.DataType;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 
-import com.google.android.gms.fitness.result.ListSubscriptionsResult;
-import com.google.android.gms.fitness.data.Subscription;
-
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class RecordingApi {
@@ -94,18 +87,15 @@ public class RecordingApi {
                         @Override
                         public void onResult(@NonNull Status status) {
                             WritableMap map = Arguments.createMap();
-
                             map.putString("type", eventName);
-
                             if (status.isSuccess()) {
                                 map.putBoolean("recording", true);
                                 Log.i(TAG, "RecordingAPI - Connected");
-                                sendEvent(reactContext, eventName, map);
                             } else {
                                 map.putBoolean("recording", false);
                                 Log.i(TAG, "RecordingAPI - Error connecting");
-                                sendEvent(reactContext, eventName, map);
                             }
+                            sendEvent(reactContext, eventName, map);
                         }
                     });
         }

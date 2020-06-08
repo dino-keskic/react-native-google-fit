@@ -11,8 +11,6 @@
 
 package com.reactnative.googlefit;
 
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
@@ -20,39 +18,24 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.data.Bucket;
 import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
-import com.google.android.gms.fitness.data.DataSource;
-import com.google.android.gms.fitness.request.DataSourcesRequest;
 import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.result.DataReadResult;
-import com.google.android.gms.fitness.result.DataSourcesResult;
-import com.google.android.gms.fitness.data.Device;
 
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
-import java.util.ArrayList;
 
 
 import static com.google.android.gms.fitness.data.Device.TYPE_WATCH;
 
 public class ActivityHistory {
 
-    private ReactContext mReactContext;
     private GoogleFitManager googleFitManager;
 
     private static final String STEPS_FIELD_NAME = "steps";
@@ -70,7 +53,6 @@ public class ActivityHistory {
     private static final String TAG = "RNGoogleFit";
 
     public ActivityHistory(ReactContext reactContext, GoogleFitManager googleFitManager){
-        this.mReactContext = reactContext;
         this.googleFitManager = googleFitManager;
     }
 
@@ -89,7 +71,6 @@ public class ActivityHistory {
         List<Bucket> buckets = dataReadResult.getBuckets();
         for (Bucket bucket : buckets) {
             String activityName = bucket.getActivity();
-            int activityType = bucket.getBucketType();
             if (!bucket.getDataSets().isEmpty()) {
                 long start = bucket.getStartTime(TimeUnit.MILLISECONDS);
                 long end = bucket.getEndTime(TimeUnit.MILLISECONDS);

@@ -18,7 +18,7 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', 27)
+    compileSdkVersion safeExtGet('compileSdkVersion', 28)
     // buildToolsVersion safeExtGet('buildToolsVersion', '27.0.3')
 
     defaultConfig {
@@ -44,10 +44,9 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation('com.facebook.react:react-native:+') {
-        exclude group: 'com.android.support'
-    }
-    implementation "com.android.support:appcompat-v7:${safeExtGet('supportLibVersion', '27.0.0')}"
+    implementation "com.facebook.react:react-native:${safeExtGet('reactnativeVersion', '+')}"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.annotation:annotation:1.0.0'
     implementation "com.google.android.gms:play-services-auth:${safeExtGet('authVersion', '+')}"
     implementation "com.google.android.gms:play-services-fitness:${safeExtGet('fitnessVersion', '+')}"
 }

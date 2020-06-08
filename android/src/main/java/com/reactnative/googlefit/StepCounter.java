@@ -12,8 +12,9 @@
 package com.reactnative.googlefit;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
@@ -38,7 +39,6 @@ public class StepCounter implements OnDataPointListener {
 
     private ReactContext mReactContext;
     private GoogleFitManager googleFitManager;
-    private Activity activity;
 
     private static final String TAG = "StepCounter";
 
@@ -46,7 +46,6 @@ public class StepCounter implements OnDataPointListener {
     public StepCounter(ReactContext reactContext, GoogleFitManager googleFitManager, Activity activity) {
         this.mReactContext = reactContext;
         this.googleFitManager = googleFitManager;
-        this.activity = activity;
     }
 
     public void findFitnessDataSources() {
@@ -104,15 +103,6 @@ public class StepCounter implements OnDataPointListener {
             final Value value = dataPoint.getValue(field);
             Log.i(TAG, "Detected DataPoint field: " + field.getName());
             Log.i(TAG, "Detected DataPoint value: " + value);
-
-
-       /*     activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(mReactContext.getApplicationContext(), "Field: " + field.getName() + " Value: " + value, Toast.LENGTH_SHORT).show();
-                }
-            });*/
-
             if(type.equals(DataType.TYPE_STEP_COUNT_DELTA)) {
                 WritableMap map = Arguments.createMap();
                 map.putDouble("steps", value.asInt());

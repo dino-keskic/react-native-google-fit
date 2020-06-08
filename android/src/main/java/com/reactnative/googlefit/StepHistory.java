@@ -3,17 +3,17 @@
  * All rights reserved.
  *
  * This source code is licensed under the MIT-style license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Based on Asim Malik android source code, copyright (c) 2015
- *
+ *  * LICENSE file in the root directory of this source tree.
+ *  *
+ *  * Based on Asim Malik android source code, copyright (c) 2015
+ *  *
  **/
 
 package com.reactnative.googlefit;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
@@ -30,19 +30,14 @@ import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.DataSource;
-import com.google.android.gms.fitness.request.DataSourcesRequest;
 import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.result.DataReadResult;
-import com.google.android.gms.fitness.result.DataSourcesResult;
 import com.google.android.gms.fitness.data.Device;
 
 import java.text.DateFormat;
-import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -132,20 +127,6 @@ public class StepHistory {
                 .setStreamName("")
                 .build()
         );
-
-        /*
-        DataSourcesRequest sourceRequest = new DataSourcesRequest.Builder()
-                .setDataTypes(DataType.TYPE_STEP_COUNT_DELTA,
-                    DataType.TYPE_STEP_COUNT_CUMULATIVE,
-                    DataType.AGGREGATE_STEP_COUNT_DELTA
-                    )
-                //.setDataSourceTypes(DataSource.TYPE_DERIVED)
-                .build();
-        DataSourcesResult dataSourcesResult =
-           Fitness.SensorsApi.findDataSources(googleFitManager.getGoogleApiClient(), sourceRequest).await(1, TimeUnit.MINUTES);
-
-        dataSources.addAll( dataSourcesResult.getDataSources() );
-        */
 
         final AtomicInteger dataSourcesToLoad = new AtomicInteger(dataSources.size());
 
