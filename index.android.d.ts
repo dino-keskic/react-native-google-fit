@@ -1,5 +1,12 @@
 // tslint:disable:no-default-export interface-name
 declare module 'react-native-google-fit' {
+  export interface WorkoutData {
+    startTime: number
+    endTime: number
+    id: string
+    name?: string
+    description?: string
+  }
   export interface GoogleFit {
     eventListeners: any[]
     isAuthorized: boolean
@@ -18,7 +25,10 @@ declare module 'react-native-google-fit' {
      * Simply create an event listener for the {DATA_TYPE}_RECORDING (ex. STEP_RECORDING)
      * and check for {recording: true} as the event data
      */
-    startRecording: (callback: (param: any) => void, dataTypes: Array<string>) => void
+    startRecording: (
+      callback: (param: any) => void,
+      dataTypes: Array<string>
+    ) => void
 
     getSteps(dayStart: Date | string, dayEnd: Date | string): any
 
@@ -48,13 +58,16 @@ declare module 'react-native-google-fit' {
 
     /**
      * Get the total steps per day over a specified date range.
-      * @param {Object} options getUserInputSteps accepts an options object containing required startDate: ISO8601Timestamp and endDate: ISO8601Timestamp.
-      * @param {Function} callback The function will be called with an array of elements.
-      */
-    getUserInputSteps: (options: {
-        startDate: string,
-        endDate: string,
-    }, callback: (isError?: boolean, result?: number)=> void ) => void;
+     * @param {Object} options getUserInputSteps accepts an options object containing required startDate: ISO8601Timestamp and endDate: ISO8601Timestamp.
+     * @param {Function} callback The function will be called with an array of elements.
+     */
+    getUserInputSteps: (
+      options: {
+        startDate: string
+        endDate: string
+      },
+      callback: (isError?: boolean, result?: number) => void
+    ) => void
 
     /**
      * Get the total distance per day over a specified date range.
@@ -125,6 +138,8 @@ declare module 'react-native-google-fit' {
       callback: (isError: boolean, result: any) => void
     ) => void
 
+    saveWorkout: (data: WorkoutData) => Promise<any>
+
     deleteWeight: (
       options: DeleteOptions,
       callback: (isError: boolean, result: any) => void
@@ -160,8 +175,6 @@ declare module 'react-native-google-fit' {
       options: any,
       callback?: (isError: boolean, result: any) => void
     ) => Promise<any> | void
-
-
 
     isAvailable(callback: (isError: boolean, result: boolean) => void): void
 
